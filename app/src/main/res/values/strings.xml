@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Meds Complete</string>
+    <string name="ver_rem_dios">Ver Remédios</string>
+    <string name="configura_es">Configurações</string>
+    <string name="rem_dio_1">Remédio 1</string>
+    <string name="rem_dio_x">Remédio X</string>
+    <string name="rem_dio_x1">Remédio X:</string>
+    <string name="antes_de_tomar_x_e_depois_y">Antes de tomar X e depois Y</string>
+</resources>
