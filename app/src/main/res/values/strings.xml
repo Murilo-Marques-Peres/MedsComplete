@@ -6,4 +6,13 @@
     <string name="rem_dio_x">Remédio X</string>
     <string name="rem_dio_x1">Remédio X:</string>
     <string name="antes_de_tomar_x_e_depois_y">Antes de tomar X e depois Y</string>
+    <string name="nome_do_rem_dio">Nome do Remédio:</string>
+    <string name="adicionar_rem_dio">Adicionar Remédio</string>
+    <string name="nome">Nome</string>
+    <string name="quantidade_p_dia">Quantidade P/ Dia:</string>
+    <string name="dose_di_ria1">Dose Diária</string>
+    <string name="adicionar_rem_dio2">Adicionar Remédio</string>
+    <string name="remover_rem_dio">Remover Remédio</string>
+    <string name="nome2">Nome:</string>
+    <string name="adicionar_nome_para_exclus_o">Adicionar nome para exclusão</string>
 </resources>
