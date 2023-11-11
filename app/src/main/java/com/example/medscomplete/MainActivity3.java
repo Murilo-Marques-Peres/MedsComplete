@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity3 extends AppCompatActivity {
     Button buttonAdd;
     Button buttonRemove;
@@ -17,6 +19,7 @@ public class MainActivity3 extends AppCompatActivity {
     TextView campoNome;
     TextView campoDose;
     TextView campoNomeDelete;
+    TextView campoHoje;
 
 
     @Override
@@ -28,6 +31,7 @@ public class MainActivity3 extends AppCompatActivity {
         buttonRemove = findViewById(R.id.button3);
         campoNome = findViewById(R.id.editTextTextPersonName);
         campoDose = findViewById(R.id.editTextTextPersonName2);
+        campoHoje = findViewById(R.id.editTextTextPersonName5);
         campoNomeDelete = findViewById(R.id.editTextTextPersonName3);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +39,11 @@ public class MainActivity3 extends AppCompatActivity {
             public void onClick(View v) {
                 String nome = campoNome.getText().toString();
                 float dose = Float.parseFloat(campoDose.getText().toString());
-                adicionarRemedio(dose, nome);
+                float hoje = Float.parseFloat(campoHoje.getText().toString());
+                adicionarRemedio(dose, hoje, nome);
+                campoNome.setText("");
+                campoDose.setText("");
+                campoHoje.setText("");
             }
         });
         buttonRemove.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +51,11 @@ public class MainActivity3 extends AppCompatActivity {
             public void onClick(View v) {
                 String nomeDelete = campoNomeDelete.getText().toString();
                 excluirRemedio(nomeDelete);
+                campoNomeDelete.setText("");
             }
         });
     }
-    public void adicionarRemedio(float dose, String nome){
+    public void adicionarRemedio(float dose, float hoje, String nome){
         SharedPreferences sharedPreferences =
                 getSharedPreferences(MainActivity2.ARQUIVO_MEUS_DADOS, Context.MODE_PRIVATE);
                 float tamanhoRemedio = sharedPreferences.getFloat("tamanhoRemedio", 0);
@@ -54,6 +63,8 @@ public class MainActivity3 extends AppCompatActivity {
                 sharedPreferences.edit().putFloat("tamanhoRemedio", tamanhoRemedio).apply();
                 String adressDose = "dose" + String.valueOf(tamanhoRemedio);
                 String adressNome = "nome" + String.valueOf(tamanhoRemedio);
+                String adressHoje = "hoje" + String.valueOf(tamanhoRemedio);
+                sharedPreferences.edit().putFloat(adressHoje, hoje).apply();
                 sharedPreferences.edit().putFloat(adressDose, dose).apply();
                 sharedPreferences.edit().putString(adressNome, nome).apply();
         Toast.makeText(MainActivity3.this, "Ação de Adicionar Ativado", Toast.LENGTH_LONG).show();
@@ -66,12 +77,13 @@ public class MainActivity3 extends AppCompatActivity {
         for(int x = 0;x <= tamanhoRemedioInt; x++){
             String adressDose = "dose" + String.valueOf(x) + ".0";
             String adressNome = "nome" + String.valueOf(x) + ".0";
-            if(nome.equals(sharedPreferences.getString(adressNome, null))){
-                sharedPreferences.edit()
-                        .remove(adressNome).apply();
-                sharedPreferences.edit()
-                        .remove(adressDose).apply();
-            }
+            String adressHoje = "hoje" + String.valueOf(x) + ".0";
+            sharedPreferences.edit()
+                    .remove(adressNome).apply();
+            sharedPreferences.edit()
+                    .remove(adressDose).apply();
+            sharedPreferences.edit()
+                    .remove(adressHoje).apply();
         }
 
 
