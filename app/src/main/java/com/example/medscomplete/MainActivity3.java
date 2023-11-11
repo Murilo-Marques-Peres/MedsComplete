@@ -24,7 +24,7 @@ public class MainActivity3 extends AppCompatActivity {
     TextView campoDose;
     TextView campoNomeDelete;
     TextView campoHoje;
-
+    TextView campoCaixa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class MainActivity3 extends AppCompatActivity {
         campoNome = findViewById(R.id.editTextTextPersonName);
         campoDose = findViewById(R.id.editTextTextPersonName2);
         campoHoje = findViewById(R.id.editTextTextPersonName5);
+        campoCaixa = findViewById(R.id.novoIdText1);
         campoNomeDelete = findViewById(R.id.editTextTextPersonName3);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +50,7 @@ public class MainActivity3 extends AppCompatActivity {
                 campoNome.setText("");
                 campoDose.setText("");
                 campoHoje.setText("");
+                campoCaixa.setText("");
             }
         });
         buttonRemove.setOnClickListener(new View.OnClickListener() {
@@ -73,15 +75,21 @@ public class MainActivity3 extends AppCompatActivity {
                 MainActivity2 mainActivity2 = new MainActivity2();
                 float diasAtuais = mainActivity2.calcularAtualNovo();
                 float numeroDez = hoje + diasAtuais * dose;
-                while(numeroDez > 30){
-                    numeroDez -= 30;
+                float valorCaixa = Float.parseFloat(campoCaixa.getText().toString());
+                if(valorCaixa != 0){
+                    while(numeroDez > valorCaixa){
+                        numeroDez -= valorCaixa;
+                    }
                 }
                 String adressNumeroDez = "numerodez" + String.valueOf(tamanhoRemedio);
-                        sharedPreferences.edit().putFloat(adressNumeroDez, numeroDez).apply();
-                ////////////////////////////////////////////////////////////////
+                sharedPreferences.edit().putFloat(adressNumeroDez, numeroDez).apply();
+                String adressCaixa = "caixa" + String.valueOf(tamanhoRemedio);
+                sharedPreferences.edit().putFloat(adressCaixa, valorCaixa).apply();
+                ///////////////////////////////////////////////////////////////
                 sharedPreferences.edit().putString(adressNome, nome).apply();
                 sharedPreferences.edit().putFloat(adressHoje, hoje).apply();
                 sharedPreferences.edit().putFloat(adressDose, dose).apply();
+
 
 
         Toast.makeText(MainActivity3.this, "Ação de Adicionar Ativado", Toast.LENGTH_LONG).show();
@@ -96,14 +104,19 @@ public class MainActivity3 extends AppCompatActivity {
             String adressNome = "nome" + String.valueOf(x) + ".0";
             String adressHoje = "hoje" + String.valueOf(x) + ".0";
             String adressNumeroDez = "numerodez" + String.valueOf(x) + ".0";
+            String adressCaixa = "caixa" + String.valueOf(x) + ".0";
             String nomePesquisado = sharedPreferences.getString(adressNome, null);
-            if (nome.equals(nomePesquisado)) {
+            if(nome.equals(nomePesquisado)) {
                 sharedPreferences.edit()
                         .remove(adressNome).apply();
                 sharedPreferences.edit()
                         .remove(adressDose).apply();
                 sharedPreferences.edit()
                         .remove(adressNumeroDez).apply();
+                sharedPreferences.edit()
+                        .remove(adressHoje).apply();
+                sharedPreferences.edit()
+                        .remove(adressCaixa).apply();
             }
         }
     }

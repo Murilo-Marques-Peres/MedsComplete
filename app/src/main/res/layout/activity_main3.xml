@@ -40,7 +40,9 @@
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"
+
+        />
 
     <TextView
         android:id="@+id/textView5"
@@ -61,7 +63,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/dose_di_ria1"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         tools:ignore="TouchTargetSizeCheck" />
@@ -71,14 +73,13 @@
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
         android:text="@string/adicionar_rem_dio2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/novoIdText1" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="402dp"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
@@ -125,8 +126,8 @@
         android:id="@+id/textView8"
         android:layout_width="152dp"
         android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:text="@string/quantos_voc_tem_hoje"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,9 +140,33 @@
         android:layout_marginStart="5dp"
         android:ems="10"
         android:hint="@string/n_mero_de_pilulas"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="163dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Quantos pílulas vem na caixa"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/novoIdText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="Pílulas por caixa"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5"
         tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

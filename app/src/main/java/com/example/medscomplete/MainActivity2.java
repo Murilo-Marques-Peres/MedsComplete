@@ -36,7 +36,8 @@ public class MainActivity2 extends AppCompatActivity {
             String adressDose = "dose" + String.valueOf(x) + ".0";
             float dose = sharedPreferences.getFloat(adressDose, 0);
 
-
+            String adressValorCaixa = "caixa" + String.valueOf(x) + ".0";
+            float caixa = sharedPreferences.getFloat(adressValorCaixa, 0);
 
 
             String adressHoje = "hoje" + String.valueOf(x) + ".0";
@@ -44,8 +45,10 @@ public class MainActivity2 extends AppCompatActivity {
             String adressNumeroDez = "numerodez" + String.valueOf(x) + ".0";
             float numeroDez = sharedPreferences.getFloat(adressNumeroDez, 0);
             float doseCalculada = numeroDez - calcularAtualNovo() * dose;
-            while(doseCalculada <= 0){
-                doseCalculada += 30;
+            if(caixa != 0){
+                while(doseCalculada <= 0){
+                    doseCalculada += caixa;
+                }
             }
             if(nomeRemedio!= null){
                 String doseChange1 = (String.valueOf(doseCalculada)).replace(".",",");
