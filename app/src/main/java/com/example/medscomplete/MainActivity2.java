@@ -48,7 +48,14 @@ public class MainActivity2 extends AppCompatActivity {
                 doseCalculada += 30;
             }
             if(nomeRemedio!= null){
-                lista1.add(new InfoRemedios((nomeRemedio + ":"), "Antes de tomar " + String.valueOf(doseCalculada) + " e depois " + String.valueOf(doseCalculada - dose)));
+                String doseChange1 = (String.valueOf(doseCalculada)).replace(".",",");
+                String[] doseCorte = doseChange1.split(",0",-2);
+                String doseChange2 = doseCorte[0];
+
+                String dose2Change1 = (String.valueOf(doseCalculada - dose)).replace(".",",");
+                String[] dose2Corte = dose2Change1.split(",0",-2);
+                String dose2Change2 = dose2Corte[0];
+                lista1.add(new InfoRemedios((nomeRemedio + ":"), "Antes de tomar " + doseChange2 + " e depois " + dose2Change2));
             }
         }
 
