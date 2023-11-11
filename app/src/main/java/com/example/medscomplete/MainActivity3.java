@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity3 extends AppCompatActivity {
     Button buttonAdd;
     Button buttonRemove;
@@ -40,6 +44,7 @@ public class MainActivity3 extends AppCompatActivity {
                 String nome = campoNome.getText().toString();
                 float dose = Float.parseFloat(campoDose.getText().toString());
                 float hoje = Float.parseFloat(campoHoje.getText().toString());
+
                 adicionarRemedio(dose, hoje, nome);
                 campoNome.setText("");
                 campoDose.setText("");
@@ -64,42 +69,42 @@ public class MainActivity3 extends AppCompatActivity {
                 String adressDose = "dose" + String.valueOf(tamanhoRemedio);
                 String adressNome = "nome" + String.valueOf(tamanhoRemedio);
                 String adressHoje = "hoje" + String.valueOf(tamanhoRemedio);
+                //////////////////////////////////////////////////////////////
+                MainActivity2 mainActivity2 = new MainActivity2();
+                float diasAtuais = mainActivity2.calcularAtualNovo();
+                float numeroDez = hoje + diasAtuais * dose;
+                while(numeroDez > 30){
+                    numeroDez -= 30;
+                }
+                String adressNumeroDez = "numerodez" + String.valueOf(tamanhoRemedio);
+                        sharedPreferences.edit().putFloat(adressNumeroDez, numeroDez).apply();
+                ////////////////////////////////////////////////////////////////
+                sharedPreferences.edit().putString(adressNome, nome).apply();
                 sharedPreferences.edit().putFloat(adressHoje, hoje).apply();
                 sharedPreferences.edit().putFloat(adressDose, dose).apply();
-                sharedPreferences.edit().putString(adressNome, nome).apply();
+
+
         Toast.makeText(MainActivity3.this, "Ação de Adicionar Ativado", Toast.LENGTH_LONG).show();
     }
-    public void excluirRemedio(String nome){
+    public void excluirRemedio(String nome) {
         SharedPreferences sharedPreferences =
                 getSharedPreferences(MainActivity2.ARQUIVO_MEUS_DADOS, Context.MODE_PRIVATE);
         float tamanhoRemedio = sharedPreferences.getFloat("tamanhoRemedio", 0);
         int tamanhoRemedioInt = Math.round(tamanhoRemedio);
-        for(int x = 0;x <= tamanhoRemedioInt; x++){
+        for (int x = 0; x <= tamanhoRemedioInt; x++) {
             String adressDose = "dose" + String.valueOf(x) + ".0";
             String adressNome = "nome" + String.valueOf(x) + ".0";
             String adressHoje = "hoje" + String.valueOf(x) + ".0";
-            sharedPreferences.edit()
-                    .remove(adressNome).apply();
-            sharedPreferences.edit()
-                    .remove(adressDose).apply();
-            sharedPreferences.edit()
-                    .remove(adressHoje).apply();
+            String adressNumeroDez = "numerodez" + String.valueOf(x) + ".0";
+            String nomePesquisado = sharedPreferences.getString(adressNome, null);
+            if (nome.equals(nomePesquisado)) {
+                sharedPreferences.edit()
+                        .remove(adressNome).apply();
+                sharedPreferences.edit()
+                        .remove(adressDose).apply();
+                sharedPreferences.edit()
+                        .remove(adressNumeroDez).apply();
+            }
         }
-
-
-
-        /*SharedPreferences sharedPreferences =
-                getSharedPreferences(ARQUIVO_MEUS_DADOS, Context.MODE_PRIVATE);
-        float valorAtual = sharedPreferences.getFloat(String.
-                valueOf(ano), 0);
-        float novoValor = valorAtual - valor;
-        if(novoValor < 0){
-            novoValor = 0;
-        }
-        sharedPreferences.edit()
-                .putFloat(String.valueOf(ano), novoValor)
-                .apply();
-                */
-
     }
 }

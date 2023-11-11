@@ -35,11 +35,20 @@ public class MainActivity2 extends AppCompatActivity {
             String nomeRemedio = sharedPreferences.getString(AdressnomeRemedio, null);
             String adressDose = "dose" + String.valueOf(x) + ".0";
             float dose = sharedPreferences.getFloat(adressDose, 0);
+
+
+
+
             String adressHoje = "hoje" + String.valueOf(x) + ".0";
             float hoje = sharedPreferences.getFloat(adressHoje, 0);
-            float doseCalculada = calcularAtualNovo(dose, hoje);
+            String adressNumeroDez = "numerodez" + String.valueOf(x) + ".0";
+            float numeroDez = sharedPreferences.getFloat(adressNumeroDez, 0);
+            float doseCalculada = numeroDez - calcularAtualNovo() * dose;
+            while(doseCalculada <= 0){
+                doseCalculada += 30;
+            }
             if(nomeRemedio!= null){
-                lista1.add(new InfoRemedios(nomeRemedio, "Antes de tomar " + String.valueOf(doseCalculada) + " e depois " + String.valueOf(doseCalculada - dose)));
+                lista1.add(new InfoRemedios((nomeRemedio + ":"), "Antes de tomar " + String.valueOf(doseCalculada) + " e depois " + String.valueOf(doseCalculada - dose)));
             }
         }
 
@@ -57,7 +66,7 @@ public class MainActivity2 extends AppCompatActivity {
         rvListagem.setAdapter(adaptador);
         adaptador.atualizarListagemCompleta(lista1);
     }
-    public float calcularAtualNovo(float dose1, float hoje) {
+    public float calcularAtualNovo() {
         Calendar cal = Calendar.getInstance();
         Date data = (Date) cal.getTime();
         String a1 = String.valueOf(data);
@@ -115,14 +124,7 @@ public class MainActivity2 extends AppCompatActivity {
         }
         soma_dias_atuais = soma_meses_completos + dia_atual_integer;
 
-        float doseDez1dose1 = hoje + soma_dias_atuais * dose1; //Falta;
-        while(doseDez1dose1 > 30){
-            doseDez1dose1 -= 30;
-        }
-        float resultadoFinal = doseDez1dose1 - (soma_dias_atuais * dose1);
-        while(resultadoFinal <=0){
-            resultadoFinal += 30;
-        }
-        return resultadoFinal;
+
+        return soma_dias_atuais;
     }
 }
