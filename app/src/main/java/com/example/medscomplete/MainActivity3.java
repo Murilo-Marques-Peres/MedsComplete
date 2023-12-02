@@ -26,6 +26,12 @@ public class MainActivity3 extends AppCompatActivity {
     TextView campoHoje;
     TextView campoCaixa;
 
+    public String fixingString(String nome){
+        String[] arrayNome = nome.split(" ",0);
+        String nomeJoin = String.join(" ", arrayNome);
+        return nomeJoin;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +49,7 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nome = campoNome.getText().toString();
-                nome = nome.replace(" ","");
+                nome = fixingString(nome);
                 float dose = Float.parseFloat(campoDose.getText().toString());
                 float hoje = Float.parseFloat(campoHoje.getText().toString());
 
@@ -58,7 +64,7 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nomeDelete = campoNomeDelete.getText().toString();
-                nomeDelete = nomeDelete.replace(" ","");
+                nomeDelete = fixingString(nomeDelete);
                 excluirRemedio(nomeDelete);
                 campoNomeDelete.setText("");
             }
