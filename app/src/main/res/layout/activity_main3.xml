@@ -63,7 +63,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/dose_di_ria1"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         tools:ignore="TouchTargetSizeCheck" />
