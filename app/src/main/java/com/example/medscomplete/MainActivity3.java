@@ -43,6 +43,7 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nome = campoNome.getText().toString();
+                nome = nome.replace(" ","");
                 float dose = Float.parseFloat(campoDose.getText().toString());
                 float hoje = Float.parseFloat(campoHoje.getText().toString());
 
@@ -57,6 +58,7 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nomeDelete = campoNomeDelete.getText().toString();
+                nomeDelete = nomeDelete.replace(" ","");
                 excluirRemedio(nomeDelete);
                 campoNomeDelete.setText("");
             }
