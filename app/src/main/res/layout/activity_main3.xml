@@ -140,7 +140,7 @@
         android:layout_marginStart="5dp"
         android:ems="10"
         android:hint="@string/n_mero_de_pilulas"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
         tools:ignore="TouchTargetSizeCheck" />
